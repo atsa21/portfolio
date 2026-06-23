@@ -8,7 +8,7 @@ export const petProjects: Project[] = [
     description: 'Notatka (means "note") started as a pet project to fix my own mess: todos in one app, a wishlist in another, reminders in a third. I wanted one clean place for all of it.',
     tags: ['Angular 20', 'Firebase', 'PWA'],
     url: 'https://todo-list-app-45cf7.web.app/login',
-    image: '/work/notatka.png',
+    image: 'work/notatka.png',
   },
   {
     title: 'Ubiudgeti',
@@ -18,6 +18,6 @@ export const petProjects: Project[] = [
     tags: ['Angular 20', 'Firebase'],
     url: 'https://github.com/atsa21',
     isComing: true,
-    image: '/work/budget.png',
+    image: 'work/budget.png',
   },
 ];

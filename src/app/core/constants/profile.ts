@@ -6,7 +6,7 @@ export const profile = {
   available: 'Open to work — 2026',
   email: 'anna.sakhaudinova@gmail.com',
 
-  photo: '/about/portrait.jpg',
+  photo: 'about/portrait.jpg',
   photoAlt: 'Anna Sakhaudinova, frontend developer, at her desk',
   photoCaption: 'Made by Anna',
 
