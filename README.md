@@ -72,7 +72,14 @@ the site; no component changes needed.
 
 ## Deployment
 
-Pushing to `main` triggers the
-[Deploy to GitHub Pages](.github/workflows/deploy.yml) workflow, which builds the
-app with `--base-href /portfolio/` and publishes `dist/portfolio/browser` to
-GitHub Pages. The live URL updates automatically once the run completes.
+Deployed manually to GitHub Pages with
+[angular-cli-ghpages](https://github.com/angular-schule/angular-cli-ghpages):
+
+```bash
+npm run deploy
+```
+
+This builds the app with `--base-href /portfolio/` and pushes the output to the
+`gh-pages` branch. One-time setup: in **Settings → Pages**, set the source to
+**Deploy from a branch → `gh-pages` / `(root)`**. The live URL updates a minute
+or two after each deploy.
