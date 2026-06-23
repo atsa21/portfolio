@@ -9,7 +9,7 @@
     <ul class="projects__grid">
       @for (project of projects(); track project.title; let i = $index) {
         <li class="card" [appReveal]="i * 90">
-          @if (project.url) {
+          @if (project.url && !project.isComing) {
             <a class="card__link" [href]="project.url" target="_blank" rel="noopener"
               [attr.aria-label]="'View ' + project.title"></a>
           }
@@ -17,6 +17,9 @@
           <div class="card__media" [class.is-empty]="!project.image">
             @if (project.image) {
               <img [src]="project.image" [alt]="project.title + ' — ' + project.category" loading="lazy" />
+              @if (project.isComing) {
+                <span class="card__soon">Coming soon</span>
+              }
             } @else {
               <span class="card__placeholder" aria-hidden="true">{{ indexLabel(i) }}</span>
               <span class="card__soon">Coming soon</span>

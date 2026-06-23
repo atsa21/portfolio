@@ -4,6 +4,7 @@ export interface Project {
   year: string;
   description: string;
   tags: string[];
+  isComing?: boolean;
   image?: string;
   url?: string;
 }

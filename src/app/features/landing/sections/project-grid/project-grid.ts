@@ -3,11 +3,6 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RevealDirective } from '@shared/directives/reveal.directive';
 import { Project } from '@core/models';
 
-/**
- * Reusable card grid for any collection of projects.
- * Rendered once per section (Experience, Pet Projects, …) with its own
- * heading and data. Cards with no `image` show a numbered placeholder slot.
- */
 @Component({
   selector: 'app-project-grid',
   templateUrl: './project-grid.html',
