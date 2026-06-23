@@ -1,0 +1,48 @@
+<section class="projects" [id]="sectionId()">
+  <div class="container">
+    <header class="projects__head" appReveal>
+      <span class="eyebrow">{{ eyebrow() }}</span>
+      <h2 class="projects__title">{{ titleLead() }} <span class="accent">{{ titleAccent() }}</span></h2>
+      <p class="projects__count">{{ projects().length }} {{ countNoun() }}</p>
+    </header>
+
+    <ul class="projects__grid">
+      @for (project of projects(); track project.title; let i = $index) {
+        <li class="card" [appReveal]="i * 90">
+          @if (project.url) {
+            <a class="card__link" [href]="project.url" target="_blank" rel="noopener"
+              [attr.aria-label]="'View ' + project.title"></a>
+          }
+
+          <div class="card__media" [class.is-empty]="!project.image">
+            @if (project.image) {
+              <img [src]="project.image" [alt]="project.title + ' — ' + project.category" loading="lazy" />
+            } @else {
+              <span class="card__placeholder" aria-hidden="true">{{ indexLabel(i) }}</span>
+              <span class="card__soon">Coming soon</span>
+            }
+          </div>
+
+          <div class="card__body">
+            <div class="card__meta">
+              <span class="card__category">{{ project.category }}</span>
+              <span class="card__year">{{ project.year }}</span>
+            </div>
+            <h3 class="card__name">
+              {{ project.title }}
+              <svg class="card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </h3>
+            <p class="card__desc">{{ project.description }}</p>
+            <ul class="card__tags">
+              @for (tag of project.tags; track tag) {
+                <li>{{ tag }}</li>
+              }
+            </ul>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

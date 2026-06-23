@@ -1,0 +1,30 @@
+<nav class="nav" [class.is-scrolled]="scrolled()" aria-label="Primary">
+  <a class="nav__brand" href="#top" (click)="closeMenu()" aria-label="Back to top">
+    <span class="nav__monogram" aria-hidden="true">{{ initials }}</span>
+    <span class="nav__name">{{ profile.firstName }} {{ profile.lastName }}</span>
+  </a>
+
+  <button
+    class="nav__toggle"
+    type="button"
+    [attr.aria-expanded]="menuOpen()"
+    aria-controls="nav-links"
+    (click)="toggleMenu()"
+  >
+    <span class="nav__toggle-label">{{ menuOpen() ? 'Close' : 'Menu' }}</span>
+    <span class="nav__toggle-bars" [class.is-open]="menuOpen()" aria-hidden="true">
+      <span></span><span></span>
+    </span>
+  </button>
+
+  <ul id="nav-links" class="nav__links" [class.is-open]="menuOpen()">
+    @for (link of links; track link.href) {
+      <li>
+        <a [href]="link.href" (click)="closeMenu()">{{ link.label }}</a>
+      </li>
+    }
+    <li class="nav__status" aria-hidden="true">
+      <span class="dot"></span>{{ profile.available }}
+    </li>
+  </ul>
+</nav>

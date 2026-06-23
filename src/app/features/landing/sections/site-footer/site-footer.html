@@ -1,0 +1,31 @@
+<footer class="footer" id="contact">
+  <div class="container footer__inner">
+    <div class="footer__cta" appReveal>
+      <span class="eyebrow">Contact / 04</span>
+      <h2 class="footer__title">
+        Let’s build<br /><span class="accent">something.</span>
+      </h2>
+      <a class="btn btn--solid footer__mail" [href]="'mailto:' + profile.email">
+        {{ profile.email }}
+        <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+
+    <nav class="footer__socials" aria-label="Social links" [appReveal]="120">
+      @for (social of socials; track social.label) {
+        <a class="footer__social" [href]="social.url" target="_blank" rel="noopener">
+          <span class="footer__social-label">{{ social.label }}</span>
+          <span class="footer__social-handle">{{ social.handle }}</span>
+        </a>
+      }
+    </nav>
+  </div>
+
+  <div class="container footer__bottom">
+    <span>© {{ year }} {{ profile.firstName }} {{ profile.lastName }}</span>
+    <span class="footer__built">Built with Angular + ☕</span>
+    <a class="footer__top" href="#top">Back to top ↑</a>
+  </div>
+</footer>

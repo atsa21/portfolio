@@ -1,0 +1,8 @@
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    @for (item of items; track $index) {
+      <span class="marquee__item">{{ item }}</span>
+      <span class="marquee__sep">✦</span>
+    }
+  </div>
+</div>

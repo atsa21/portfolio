@@ -1,0 +1,54 @@
+<section class="about" id="about">
+  <div class="container">
+    <header class="about__head" appReveal>
+      <span class="eyebrow">About / 01</span>
+      <h2 class="about__title">
+        <span class="bracket">[</span>
+        Hey, I’m <span class="accent">{{ profile.firstName }}</span> {{ profile.lastName }}
+        <span class="bracket">]</span>
+      </h2>
+    </header>
+
+    <div class="about__body">
+      <figure class="about__photo" appReveal>
+        <div class="about__photo-frame">
+          @if (photoMissing()) {
+            <div class="about__photo-fallback" role="img" [attr.aria-label]="profile.photoAlt">
+              <span class="about__photo-initials">{{ initials }}</span>
+              <span class="about__photo-hint">Add your photo →<br />public/about/portrait.jpg</span>
+            </div>
+          } @else {
+            <img
+              [src]="profile.photo"
+              [alt]="profile.photoAlt"
+              width="800"
+              height="800"
+              loading="lazy"
+              decoding="async"
+              (error)="photoMissing.set(true)"
+            />
+          }
+        </div>
+      </figure>
+
+      <div class="about__intro" [appReveal]="80">
+        @for (para of profile.intro; track $index) {
+          <p>{{ para }}</p>
+        }
+        <a class="about__mail" [href]="'mailto:' + profile.email">{{ profile.email }}</a>
+      </div>
+
+      <div class="about__skills" [appReveal]="160">
+        <h3 class="about__label">Skills</h3>
+        <ul class="skills">
+          @for (group of skills; track group.label) {
+            <li class="skills__group">
+              <span class="skills__cat">{{ group.label }}</span>
+              <span class="skills__items">{{ group.items.join(', ') }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

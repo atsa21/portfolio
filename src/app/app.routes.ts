@@ -1,3 +1,11 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+import { Landing } from './features/landing/landing';
+
+export const routes: Routes = [
+  {
+    path: '',
+    component: Landing,
+    title: 'Frontend Developer — Portfolio',
+  },
+];

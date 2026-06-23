@@ -1,0 +1,53 @@
+<section class="hero" id="top">
+  <div class="hero__grid" aria-hidden="true"></div>
+  <div class="hero__glow" aria-hidden="true"></div>
+
+  <div class="hero__tokens" aria-hidden="true">
+    @for (t of tokens; track t.text) {
+      <span
+        class="token"
+        [style.top.%]="t.top"
+        [style.left.%]="t.left"
+        [style.font-size.rem]="t.size"
+        [style.--d]="t.depth"
+        [style.--r.deg]="t.rotate"
+      >
+        {{ t.text }}
+      </span>
+    }
+  </div>
+
+  <div class="container hero__inner">
+    <div class="hero__eyebrow">
+      <span class="eyebrow">Portfolio © 2026</span>
+      <span class="hero__chip">{{ profile.location }}</span>
+    </div>
+
+    <h1 class="hero__title">
+      <span class="line"><span class="word">Frontend</span></span>
+      <span class="line"><span class="word word--accent">Developer</span></span>
+    </h1>
+
+    <div class="hero__namecard">
+      <span class="hero__namecard-label">Made by</span>
+      <span class="hero__namecard-name">{{ profile.firstName }} {{ profile.lastName }}</span>
+    </div>
+
+    <p class="hero__tagline">{{ profile.tagline }}</p>
+
+    <div class="hero__cta">
+      <a class="btn btn--solid" href="#experience">
+        View work
+        <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+      <a class="btn btn--ghost" href="#contact">Get in touch</a>
+    </div>
+  </div>
+
+  <a class="hero__scroll" href="#about" aria-label="Scroll to about section">
+    <span>Scroll</span>
+    <span class="hero__scroll-line" aria-hidden="true"></span>
+  </a>
+</section>

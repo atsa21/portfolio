@@ -1,0 +1,20 @@
+<app-site-nav />
+
+<main>
+  <app-hero />
+  <app-about />
+
+  <app-experience />
+
+  <app-project-grid
+    sectionId="pet-projects"
+    eyebrow="Pet Projects / 03"
+    titleLead="Built for"
+    titleAccent="fun"
+    countNoun="side projects"
+    [projects]="petProjects"
+  />
+
+  <app-marquee />
+  <app-site-footer />
+</main>

@@ -1,1 +1,349 @@
-/* You can add global styles to this file, and also import other style files */
+/* ============================================================
+   Global design tokens + base styles
+   Edit colors / type / spacing here once — everything inherits.
+   ============================================================ */
+
+:root {
+  /* --- Surfaces --- */
+  --ink: #100f0d; /* primary dark background  */
+  --ink-2: #181613; /* elevated dark surface    */
+  --ink-3: #221f1a; /* card / chip on dark      */
+  --paper: #f1ede3; /* warm paper background    */
+  --paper-2: #e7e0d1; /* paper elevated           */
+
+  /* --- Accent --- */
+  --accent: #eb4a26; /* orange-red, the signature */
+  --accent-deep: #c33a1b;
+
+  /* --- Text --- */
+  --on-dark: #f1ede3;
+  --on-dark-muted: #9b958a;
+  --on-paper: #161513;
+  --on-paper-muted: #6a655b;
+
+  /* --- Lines --- */
+  --line-dark: rgba(241, 237, 227, 0.1);
+  --line-dark-strong: rgba(241, 237, 227, 0.22);
+  --line-paper: rgba(22, 21, 19, 0.12);
+  --line-paper-strong: rgba(22, 21, 19, 0.28);
+
+  /* --- Type --- */
+  --font-display: 'Anton', 'Arial Narrow', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* --- Layout --- */
+  --container: 1280px;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --radius: 14px;
+  --radius-sm: 8px;
+
+  /* --- Motion --- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur: 0.55s;
+
+  /* --- Z scale --- */
+  --z-nav: 100;
+  --z-overlay: 200;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--ink);
+  color: var(--on-dark);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Visible, on-brand focus ring for keyboard users (a11y: focus-states) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Anchored sections clear the fixed navbar when jumped to */
+section[id] {
+  scroll-margin-top: 84px;
+}
+
+/* Refined scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(241, 237, 227, 0.25) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(241, 237, 227, 0.22);
+  border-radius: 999px;
+  border: 2px solid var(--ink);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ------------------------------------------------------------
+   Shared layout helpers
+   ------------------------------------------------------------ */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------
+   Buttons (shared by hero + footer)
+   ------------------------------------------------------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.8rem 1.4rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    transform 0.25s var(--ease-out),
+    background-color 0.25s var(--ease-out),
+    color 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn--solid {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn--solid:hover {
+  background: var(--accent-deep);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: currentColor;
+  border-color: var(--line-dark-strong);
+}
+
+.btn--ghost:hover {
+  border-color: currentColor;
+}
+
+.btn .arrow {
+  transition: transform 0.25s var(--ease-out);
+}
+
+.btn:hover .arrow {
+  transform: translate(2px, 2px);
+}
+
+/* ------------------------------------------------------------
+   Scroll-reveal (used by [appReveal] directive)
+   ------------------------------------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ------------------------------------------------------------
+   About portrait (frame + fallback). Lives here rather than in
+   about.scss to keep that component stylesheet under budget.
+   ------------------------------------------------------------ */
+.about__photo-frame {
+  position: relative;
+  border-radius: 4px;
+  background: #fff;
+  padding: 10px 10px 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  transform: rotate(-2.5deg);
+  transition: transform 0.45s var(--ease-out);
+
+  /* offset accent frame behind the photo */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--accent);
+    border-radius: 4px;
+    transform: translate(12px, 12px);
+    z-index: -1;
+    transition: transform 0.45s var(--ease-out);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 2px;
+    display: block;
+  }
+}
+
+.about__photo:hover .about__photo-frame {
+  transform: rotate(0deg);
+
+  &::before {
+    transform: translate(8px, 8px);
+  }
+}
+
+.about__photo-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 2px;
+  background: var(--paper-2);
+  text-align: center;
+  padding: 1rem;
+}
+
+.about__photo-initials {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: var(--accent);
+  line-height: 1;
+}
+
+.about__photo-hint {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  line-height: 1.5;
+  color: var(--on-paper-muted);
+}
+
+.about__photo-tag {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  background: var(--on-paper);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------
+   Marquee track keyframes (consumed by marquee + nav strip)
+   ------------------------------------------------------------ */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ============================================================
+   Reduced motion: honour the user's OS setting (a11y: reduced-motion)
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
