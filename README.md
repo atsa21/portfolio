@@ -1,59 +1,78 @@
-# Portfolio
+# Portfolio — Anna Sakhaudinova
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.3.
+Personal portfolio of **Anna Sakhaudinova**, Frontend Developer. A fast,
+accessible single-page site built with Angular 22 (standalone components,
+signals, zoneless-friendly reactivity).
 
-## Development server
+**Live:** https://atsa21.github.io/portfolio/
 
-To start a local development server, run:
+## Tech stack
 
-```bash
-ng serve
-```
+- **Angular 22** — standalone components, no NgModules
+- **Signals** for component state; `OnPush` change detection throughout
+- **TypeScript** (strict-leaning compiler options)
+- **SCSS** with per-component styles
+- **Vitest** for unit tests
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Getting started
 
 ```bash
-ng generate --help
+npm install
+npm start        # dev server at http://localhost:4200 (hot reload)
 ```
 
-## Building
+## Scripts
 
-To build the project run:
+| Command          | Description                                              |
+| ---------------- | ------------------------------------------------------- |
+| `npm start`      | Dev server with hot reload                               |
+| `npm run build`  | Production build to `dist/portfolio/browser`             |
+| `npm run watch`  | Rebuild on change (development configuration)            |
+| `npm test`       | Run unit tests (Vitest)                                  |
 
-```bash
-ng build
+## Project structure
+
+```
+src/app/
+├── core/                     # app-wide, non-visual concerns
+│   ├── models/               # TypeScript interfaces (Project, WorkExperience, …)
+│   └── constants/            # content data — one file per constant
+├── features/
+│   └── landing/              # the landing page feature
+│       ├── landing.*         # page shell that composes the sections
+│       └── sections/         # hero, about, experience, project-grid, marquee,
+│                             #   site-nav, site-footer
+├── shared/
+│   └── directives/           # reusable directives (e.g. scroll reveal)
+└── app.*                     # root component, routes, config
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Path aliases
 
-## Running unit tests
+Imports use aliases (configured in [tsconfig.json](tsconfig.json)) instead of
+deep relative paths:
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+| Alias        | Maps to            |
+| ------------ | ------------------ |
+| `@core/*`    | `src/app/core/*`    |
+| `@shared/*`  | `src/app/shared/*`  |
+| `@features/*`| `src/app/features/*`|
 
-```bash
-ng test
+```ts
+import { profile, socials } from '@core/constants';
+import { Project } from '@core/models';
+import { RevealDirective } from '@shared/directives/reveal.directive';
 ```
 
-## Running end-to-end tests
+### Editing content
 
-For end-to-end (e2e) testing, run:
+All site content (profile, skills, experience, projects, socials) lives in
+[src/app/core/constants/](src/app/core/constants/) — edit those files to update
+the site; no component changes needed.
 
-```bash
-ng e2e
-```
+## Deployment
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Pushing to `main` triggers the
+[Deploy to GitHub Pages](.github/workflows/deploy.yml) workflow, which builds the
+app with `--base-href /portfolio/` and publishes `dist/portfolio/browser` to
+GitHub Pages. The live URL updates automatically once the run completes.
